@@ -1,0 +1,492 @@
+/* ==========================================================
+   Éclat Hair Studio – style.css
+   Étape 3 : design (mobile-first)
+   ========================================================== */
+
+/* ===== 1. Variables ===== */
+:root {
+  /* Palette */
+  --color-primary: #3d1f3a;     /* aubergine profond */
+  --color-secondary: #b76e79;   /* rose cuivré */
+  --color-accent: #c29b57;      /* or champagne */
+  --color-background: #fbf8fa;  /* blanc rosé très clair */
+  --color-surface: #ffffff;     /* fond des cartes */
+  --color-text: #241b22;        /* prune presque noir */
+  --color-border: #e5dde2;      /* lignes discrètes */
+
+  /* Typographie */
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Espacements */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Mise en page */
+  --content-width: 72rem;
+  --radius: 2px;
+}
+
+/* ===== 2. Réinitialisation & base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  background-color: var(--color-border); /* repère visuel tant que l'image .png est absente */
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-primary);
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  max-width: 38rem;
+}
+
+/* Lien d'évitement (visible uniquement au clavier) */
+.skip-link {
+  position: absolute;
+  left: var(--space-s);
+  top: -4rem;
+  padding: var(--space-xs) var(--space-s);
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  z-index: 100;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: var(--space-xs);
+}
+
+/* Titre de section : rappel discret de la palette */
+.section-heading {
+  position: relative;
+  padding-bottom: var(--space-s);
+  margin-bottom: var(--space-l);
+}
+
+.section-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3rem;
+  height: 2px;
+  background-color: var(--color-accent);
+}
+
+/* Boutons */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+.btn-whatsapp {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-background);
+}
+
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+/* Largeur commune des sections */
+main > section {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: var(--space-xl) var(--space-s);
+}
+
+/* ===== 3. Header & navigation ===== */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-background);
+}
+
+.logo img {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: transparent;
+}
+
+.main-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s) var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav a {
+  position: relative;
+  padding-bottom: var(--space-2xs);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.2s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a:focus-visible::after {
+  width: 100%;
+}
+
+/* ===== 4. Hero ===== */
+.hero {
+  display: grid;
+  gap: var(--space-l);
+  align-items: center;
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-secondary);
+  margin-top: 0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+}
+
+.hero-image-wrap {
+  position: relative;
+}
+
+.hero-image-wrap::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-m) calc(var(--space-m) * -1) calc(var(--space-m) * -1) var(--space-m);
+  border: 1px solid var(--color-accent);
+  z-index: 0;
+}
+
+.hero-image {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* ===== 5. Services ===== */
+.services-list {
+  display: grid;
+  gap: var(--space-l);
+}
+
+.service-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: var(--space-m);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 0.75rem 1.5rem rgba(36, 27, 34, 0.1);
+}
+
+.service-card img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+  margin-bottom: var(--space-s);
+}
+
+.service-card h3 {
+  margin-bottom: var(--space-2xs);
+}
+
+.service-card .price {
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: 0;
+}
+
+/* ===== 6. À propos ===== */
+.about {
+  display: grid;
+  gap: var(--space-l);
+  align-items: center;
+}
+
+.about-image-wrap {
+  position: relative;
+}
+
+.about-image-wrap::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--space-m) * -1) var(--space-m) var(--space-m) calc(var(--space-m) * -1);
+  background-color: var(--color-secondary);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.about-image-wrap img {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* ===== 7. Galerie ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 9rem;
+  gap: var(--space-xs);
+}
+
+.gallery-grid figure {
+  margin: 0;
+  overflow: hidden;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-grid figure:nth-child(1),
+.gallery-grid figure:nth-child(4) {
+  grid-row: span 2;
+}
+
+/* ===== 8. Contact ===== */
+.contact {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  max-width: none;
+}
+
+.contact .section-heading {
+  color: var(--color-background);
+}
+
+.contact-grid {
+  display: grid;
+  gap: var(--space-l);
+  max-width: var(--content-width);
+  margin-inline: auto;
+}
+
+.contact address {
+  font-style: normal;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  align-items: flex-start;
+}
+
+/* ===== 9. Footer ===== */
+.site-footer {
+  padding: var(--space-l) var(--space-s) var(--space-m);
+  background-color: var(--color-text);
+  color: var(--color-background);
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--space-l);
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-bottom: var(--space-l);
+  border-bottom: 1px solid rgba(251, 248, 250, 0.15);
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2xs);
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-nav a {
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+.footer-contact {
+  font-style: normal;
+}
+
+.footer-copyright {
+  max-width: var(--content-width);
+  margin: var(--space-m) auto 0;
+  font-size: 0.85rem;
+  color: rgba(251, 248, 250, 0.7);
+}
+
+/* ===== 10. Tablette (48rem / 768px) ===== */
+@media (min-width: 48rem) {
+  .hero {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .services-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about {
+    grid-template-columns: 1fr 1.1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+/* ===== 11. Ordinateur (64rem / 1024px) ===== */
+@media (min-width: 64rem) {
+  main > section {
+    padding-left: var(--space-l);
+    padding-right: var(--space-l);
+  }
+}
+
+/* ===== 12. Accessibilité : mouvement réduit ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important;
+  }
+}
